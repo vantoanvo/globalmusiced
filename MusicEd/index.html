@@ -1,0 +1,410 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <!-- Makes the layout scale correctly on phones -->
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Global MusicEd — connecting students with world-class music educators.">
+  <title>Global MusicEd — Connecting Music Education Worldwide</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700&display=swap" rel="stylesheet">
+
+  <style>
+    /* ============ DESIGN TOKENS ============
+       Change these 5 values and the whole site rebrands.
+       This is the professional way to handle colors/fonts. */
+    :root {
+      --navy:   #1c2b4a;   /* primary: header, headings */
+      --gold:   #c9a227;   /* accent: buttons, highlights */
+      --ink:    #2b2f36;   /* body text */
+      --muted:  #6b7280;   /* secondary text */
+      --bg:     #f7f8fa;   /* light section background */
+      --white:  #ffffff;
+      --radius: 12px;      /* corner rounding used everywhere */
+      --maxw:   1100px;    /* content never gets wider than this */
+    }
+
+    /* ============ RESET / BASE ============
+       * { box-sizing } makes width include padding+border,
+       so layouts don't surprise you. */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    html { scroll-behavior: smooth; }  /* smooth anchor scrolling */
+
+    body {
+      font-family: "Segoe UI", system-ui, -apple-system, Arial, sans-serif;
+      color: var(--ink);
+      line-height: 1.6;
+      background: var(--white);
+    }
+
+    img { max-width: 100%; display: block; }
+
+    /* Centers content and caps its width on big screens */
+    .container { max-width: var(--maxw); margin: 0 auto; padding: 0 20px; }
+
+    section { padding: 72px 0; }
+    section.alt { background: var(--bg); }  /* alternating light bands */
+
+    h2.section-title {
+      text-align: center; font-size: 2rem; color: var(--navy);
+      margin-bottom: 12px;
+    }
+    p.section-sub {
+      text-align: center; color: var(--muted);
+      max-width: 640px; margin: 0 auto 48px;
+    }
+    
+    /* ============ HEADER / NAV ============
+       position: sticky keeps the nav visible while scrolling. */
+    header {
+      background: var(--navy); color: var(--white);
+      position: sticky; top: 0; z-index: 100;
+      box-shadow: 0 2px 10px rgba(0,0,0,.15);
+    }
+    .nav {
+      display: flex; align-items: center; justify-content: space-between;
+      height: 64px;
+    }
+    .logo { font-size: 1.25rem; font-weight: 700; letter-spacing: .5px; }
+    .logo span { color: var(--gold); }  /* "MusicEd" in gold */
+    .nav-links { display: flex; gap: 28px; list-style: none; }
+    .nav-links a {
+      color: var(--white); text-decoration: none; font-size: .95rem;
+      opacity: .9;
+    }
+    .nav-links a:hover { color: var(--gold); opacity: 1; }
+    .menu-btn {           /* hamburger, hidden on desktop */
+      display: none; background: none; border: none;
+      color: var(--white); font-size: 1.5rem; cursor: pointer;
+    }
+
+    /* ============ HERO ============
+       Big first impression: headline + one clear action. */
+    .hero {
+      background: linear-gradient(135deg, var(--navy) 0%, #2d4468 100%);
+      color: var(--white); text-align: center;
+      padding: 110px 20px;
+    }
+    .hero h1 { font-size: 2.8rem; margin-bottom: 16px; }
+    .hero h1 em { color: var(--gold); font-style: normal; }
+    .hero p { max-width: 620px; margin: 0 auto 32px; opacity: .9; font-size: 1.1rem; }
+    .btn {
+      display: inline-block; background: var(--gold); color: var(--navy);
+      font-weight: 700; text-decoration: none;
+      padding: 14px 34px; border-radius: 999px;  /* pill button */
+    }
+    .btn:hover { filter: brightness(1.08); }
+
+    /* ============ CARDS (shared pattern) ============
+       Professors, programs and sponsors all reuse this
+       "card grid" idea — learn it once, reuse everywhere. */
+    .grid {
+      display: grid;
+      /* auto-fit = as many columns as fit, each ≥260px.
+         This one line makes the grid responsive with no JS. */
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 28px;
+    }
+    .card {
+      background: var(--white); border-radius: var(--radius);
+      padding: 32px 24px; text-align: center;
+      box-shadow: 0 4px 18px rgba(28,43,74,.08);
+      border: 1px solid #e8ebf0;
+    }
+    .card:hover { transform: translateY(-4px); transition: transform .2s ease; }
+
+    /* ============ PROFESSORS ============
+       .avatar is a styled circle with initials.
+       To use a real photo, replace the <div class="avatar">
+       with: <img class="photo" src="professor.jpg" alt="Name"> */
+    .avatar {
+      width: 110px; height: 110px; border-radius: 50%;
+      margin: 0 auto 18px;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 2rem; font-weight: 700; color: var(--white);
+      background: linear-gradient(135deg, var(--navy), #3d5a86);
+      border: 3px solid var(--gold);
+    }
+    .card h3 { color: var(--navy); margin-bottom: 4px; }
+    .card .role { color: var(--gold); font-weight: 600; font-size: .9rem; margin-bottom: 12px; }
+    .card .bio { color: var(--muted); font-size: .92rem; }
+    .tag {
+      display: inline-block; margin-top: 14px; font-size: .78rem;
+      background: var(--bg); color: var(--navy);
+      padding: 4px 12px; border-radius: 999px; font-weight: 600;
+    }
+
+    /* ============ SPONSORS ============
+       Logo wall: simple bordered tiles. Replace the text
+       with <img src="logo.png"> when you have real logos. */
+    .sponsor-wall {
+      display: flex; flex-wrap: wrap; gap: 20px; justify-content: center;
+    }
+    .sponsor {
+      background: var(--white); border: 1px solid #e8ebf0;
+      border-radius: var(--radius); padding: 28px 40px;
+      font-weight: 700; color: var(--navy); font-size: 1.05rem;
+      min-width: 200px; text-align: center;
+    }
+    .sponsor small { display: block; font-weight: 400; color: var(--muted); font-size: .8rem; }
+
+    /* ============ CONTACT ============ */
+    .contact-box {
+      background: var(--navy); color: var(--white);
+      border-radius: var(--radius); padding: 48px;
+      text-align: center; max-width: 760px; margin: 0 auto;
+    }
+    .contact-box h2 { margin-bottom: 10px; }
+    .contact-box p { opacity: .85; margin-bottom: 24px; }
+    .contact-box a.email { color: var(--gold); font-weight: 700; text-decoration: none; }
+
+    /* ============ FOOTER ============ */
+    footer {
+      background: #141f36; color: #aab2c5;
+      text-align: center; padding: 28px 20px; font-size: .88rem;
+    }
+    footer a { color: var(--gold); text-decoration: none; }
+
+    /* ============ MOBILE ============
+       One breakpoint: below 720px the nav collapses into
+       a hamburger menu and the hero text shrinks. */
+    
+      /** @media (max-width: 720px) {
+        .menu-btn { display: block; }
+        .nav-links {
+          display: none;               /* hidden until toggled */
+       /*   position: absolute; top: 64px; left: 0; right: 0;
+          background: var(--navy); flex-direction: column;
+          padding: 16px 20px 24px; gap: 16px;
+        }
+        .nav-links.open { display: flex; }  /* JS toggles this class */
+      /*  .hero h1 { font-size: 2rem; }
+        section { padding: 52px 0; }
+      }*/
+      @media (max-width: 720px) {
+          .menu-btn { display: none; }   /* no hamburger — links stay visible */
+          .nav { flex-wrap: wrap; height: auto; padding: 12px 0; }
+          .nav-links {
+            display: flex; flex-direction: row;
+            width: 100%;                 /* links drop to their own row */
+            gap: 20px; padding: 10px 0 4px;
+            overflow-x: auto;            /* swipe sideways if they don't all fit */
+            white-space: nowrap;         /* keep each link on one line */
+            position: static; background: none;
+            justify-content: safe center;
+          }
+          .nav-links a { font-size: .88rem; }
+          .hero h1 { font-size: 2rem; }
+          section { padding: 52px 0; }
+          .hero-banner img { height: 300px; }
+          .hero-banner { flex-direction: column; gap: 28px; padding: 32px 20px; }
+          .hero-side { flex-direction: row; gap: 24px; }
+          .hero-left, .hero-right { text-align: center; }
+          .hero-side span { font-size: 1.4rem; white-space: normal; }
+        }
+    /* ============ HERO BANNER (image only) ============ */
+  /* ============ HERO BANNER (words | image | words) ============ */
+    .hero-banner {
+      display: flex;              /* three columns in a row */
+      align-items: center;        /* words vertically centered with the image */
+      justify-content: center;
+      gap: 48px;
+      padding: 0px;
+      background: var(--bg);
+    }
+    .hero-banner img {
+      display: block;
+      margin: 0;     /* centers it no matter what */
+      width: 100%;
+      max-width: 400px;   /* smaller now */
+      height: auto;
+      border-radius: var(--radius);
+    }
+    .hero-side {
+      display: flex;
+      flex-direction: column;     /* stack the two words vertically */
+      gap: 28px;
+    }
+    .hero-side span {
+      font-size: 1.7rem;
+      font-weight: 700;
+      color: var(--navy);
+      white-space: nowrap;        /* keep each phrase on one line */
+    }
+    .hero-left, .hero-right { text-align: center; }
+    .hero-side span {
+      font-family: "Playfair Display", Georgia, serif;
+      font-size: 2rem;          /* a bit bigger */
+      font-weight: 700;
+      color: var(--navy);
+      letter-spacing: .5px;
+      white-space: nowrap;
+      padding-bottom: 8px;
+      border-bottom: 3px solid var(--gold);   /* thin gold underline — ties into your brand */
+    }
+
+  </style>
+</head>
+
+<body>
+
+  <!-- ================= HEADER ================= -->
+  <header>
+    <div class="container nav">
+      <div class="logo">Global <span>Music <span>Education </span>Network</span></div>
+      <button class="menu-btn" id="menuBtn" aria-label="Open menu">☰</button>
+      <ul class="nav-links" id="navLinks">
+        <li><a href="#about">About</a></li>
+        <li><a href="#professors">Professors</a></li>
+        <li><a href="#programs">Programs</a></li>
+        <li><a href="#sponsors">Sponsors</a></li>
+        <li><a href="#contact">Contact</a></li>
+      </ul>
+    </div>
+  </header>
+
+  <!-- ================= HERO ================= -->
+  <!-- ================= HERO BANNER ================= -->
+  <section class="hero-banner">
+    <div class="hero-side hero-left">
+      <span>Mentorship</span>
+      <span>Access</span>
+    </div>
+    <img src="logo.webp" alt="Graduates from around the world joining hands around a globe">
+    <div class="hero-side hero-right">
+      <span>Higher Education</span>
+      <span>International</span>
+    </div>
+  </section>
+
+  <main>
+    <!-- ================= ABOUT ================= -->
+    <section id="about">
+      <div class="container">
+        <h2 class="section-title">Our Mission</h2>
+        <p class="section-sub">
+          Global MusicEd is an education-connections service dedicated to music.
+          We partner with distinguished professors and generous sponsors to bring
+          lessons, masterclasses, and scholarships to students around the world.
+        </p>
+        <div class="grid">
+          <div class="card">
+            <h3>🎓 Expert Faculty</h3>
+            <p class="bio">Professors from leading conservatories and universities.</p>
+          </div>
+          <div class="card">
+            <h3>🌍 Global Reach</h3>
+            <p class="bio">In-person and online programs across countries and time zones.</p>
+          </div>
+          <div class="card">
+            <h3>🤝 Sponsor Network</h3>
+            <p class="bio">Scholarships funded by sponsors who believe in music education.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ================= PROFESSORS ================= -->
+    <section id="professors" class="alt">
+      <div class="container">
+        <h2 class="section-title">Our Professors</h2>
+        <p class="section-sub">Distinguished educators guiding the next generation of musicians.</p>
+        <div class="grid">
+
+          <article class="card">
+            <div class="avatar">AN</div>
+            <h3>Dr. Anna Nguyen</h3>
+            <div class="role">Piano · Juilliard-trained</div>
+            <p class="bio">Concert pianist with 20 years of teaching. Former faculty at
+               leading conservatories; students have won international competitions.</p>
+            <span class="tag">Classical Piano</span>
+          </article>
+
+          <article class="card">
+            <div class="avatar">JC</div>
+            <h3>Prof. James Carter</h3>
+            <div class="role">Violin · Orchestra Director</div>
+            <p class="bio">First violinist turned educator. Specializes in technique
+               foundations and youth orchestra development programs.</p>
+            <span class="tag">Strings</span>
+          </article>
+
+          <article class="card">
+            <div class="avatar">MS</div>
+            <h3>Dr. Maria Santos</h3>
+            <div class="role">Voice · Opera &amp; Pedagogy</div>
+            <p class="bio">Opera soloist and voice scientist. Teaches healthy vocal
+               technique for classical and contemporary singers.</p>
+            <span class="tag">Vocal Arts</span>
+          </article>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- ================= PROGRAMS ================= -->
+    <section id="programs">
+      <div class="container">
+        <h2 class="section-title">Programs</h2>
+        <p class="section-sub">Ways students connect with our faculty and sponsors.</p>
+        <div class="grid">
+          <div class="card">
+            <h3>Private Lessons</h3>
+            <p class="bio">One-on-one instruction, in person or online, tailored to each student's level.</p>
+          </div>
+          <div class="card">
+            <h3>Masterclasses</h3>
+            <p class="bio">Group sessions with guest professors — perform, observe, and learn.</p>
+          </div>
+          <div class="card">
+            <h3>Scholarships</h3>
+            <p class="bio">Sponsor-funded tuition support for talented students with financial need.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ================= SPONSORS ================= -->
+    <section id="sponsors" class="alt">
+      <div class="container">
+        <h2 class="section-title">Our Sponsors</h2>
+        <p class="section-sub">Thank you to the organizations making music education accessible.</p>
+        <div class="sponsor-wall">
+          <div class="sponsor">Harmony Foundation<small>Gold Sponsor</small></div>
+          <div class="sponsor">Strings &amp; Co.<small>Instrument Partner</small></div>
+          <div class="sponsor">Aria Arts Fund<small>Scholarship Sponsor</small></div>
+          <div class="sponsor">Tempo Media<small>Media Partner</small></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ================= CONTACT ================= -->
+    <section id="contact">
+      <div class="container">
+        <div class="contact-box">
+          <h2>Get in Touch</h2>
+          <p>Interested in lessons, teaching with us, or becoming a sponsor?</p>
+          <a class="email" href="mailto:hello@globalmusiced.org">hello@globalmusiced.org</a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- ================= FOOTER ================= -->
+  <footer>
+    © 2026 Global MusicEd · <a href="https://globalmusiced.org">globalmusiced.org</a> ·
+    Connecting music education worldwide.
+  </footer>
+
+  <script>
+    // Mobile menu: toggles the .open class defined in the CSS media query.
+    // document.getElementById finds the element; classList.toggle adds/removes the class.
+    const menuBtn  = document.getElementById('menuBtn');
+    const navLinks = document.getElementById('navLinks');
+    menuBtn.addEventListener('click', () => navLinks.classList.toggle('open'));
+  </script>
+
+</body>
+</html>
