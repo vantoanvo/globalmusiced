@@ -189,14 +189,17 @@
        One breakpoint: below 720px the nav collapses into
        a hamburger menu and the hero text shrinks. */
     @media (max-width: 720px) {
-      .menu-btn { display: block; }
+      .menu-btn { display: none; }   /* no hamburger — links stay visible */
+      .nav { flex-wrap: wrap; height: auto; padding: 12px 0; }
       .nav-links {
-        display: none;               /* hidden until toggled */
-        position: absolute; top: 64px; left: 0; right: 0;
-        background: var(--navy); flex-direction: column;
-        padding: 16px 20px 24px; gap: 16px;
+        display: flex; flex-direction: row;
+        width: 100%;                 /* links drop to their own row */
+        gap: 20px; padding: 10px 0 4px;
+        overflow-x: auto;            /* swipe sideways if they don't all fit */
+        white-space: nowrap;         /* keep each link on one line */
+        position: static; background: none;
       }
-      .nav-links.open { display: flex; }  /* JS toggles this class */
+      .nav-links a { font-size: .88rem; }
       .hero h1 { font-size: 2rem; }
       section { padding: 52px 0; }
     }
@@ -208,7 +211,7 @@
   <!-- ================= HEADER ================= -->
   <header>
     <div class="container nav">
-      <div class="logo">Global <span>MusicEd</span></div>
+      <div class="logo">Global <span>Music <span>Education </span>Network</span></div>
       <button class="menu-btn" id="menuBtn" aria-label="Open menu">☰</button>
       <ul class="nav-links" id="navLinks">
         <li><a href="#about">About</a></li>
