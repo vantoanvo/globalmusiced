@@ -6,6 +6,9 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="description" content="Global MusicEd — connecting students with world-class music educators.">
   <title>Global MusicEd — Connecting Music Education Worldwide</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700&display=swap" rel="stylesheet">
 
   <style>
     /* ============ DESIGN TOKENS ============
@@ -192,10 +195,54 @@
             position: static; background: none;
             justify-content: safe center;
           }
-          .header {justify-content: safe center;}  /* no shadow on mobile */
           .nav-links a { font-size: .88rem; }
           .hero h1 { font-size: 2rem; }
           section { padding: 52px 0; }
+          .hero-banner img { height: 300px; }
+          .hero-banner { flex-direction: column; gap: 28px; padding: 32px 20px; }
+          .hero-side { flex-direction: row; gap: 24px; }
+          .hero-left, .hero-right { text-align: center; }
+          .hero-side span { font-size: 1.4rem; white-space: normal; }
+        }
+    /* ============ HERO BANNER (image only) ============ */
+  /* ============ HERO BANNER (words | image | words) ============ */
+    .hero-banner {
+      display: flex;              /* three columns in a row */
+      align-items: center;        /* words vertically centered with the image */
+      justify-content: center;
+      gap: 48px;
+      padding: 0px;
+      background: var(--bg);
+    }
+    .hero-banner img {
+      display: block;
+      margin: 0;     /* centers it no matter what */
+      width: 100%;
+      max-width: 400px;   /* smaller now */
+      height: auto;
+      border-radius: var(--radius);
+    }
+    .hero-side {
+      display: flex;
+      flex-direction: column;     /* stack the two words vertically */
+      gap: 28px;
+    }
+    .hero-side span {
+      font-size: 1.7rem;
+      font-weight: 700;
+      color: var(--navy);
+      white-space: nowrap;        /* keep each phrase on one line */
+    }
+    .hero-left, .hero-right { text-align: center; }
+    .hero-side span {
+      font-family: "Playfair Display", Georgia, serif;
+      font-size: 2rem;          /* a bit bigger */
+      font-weight: 700;
+      color: var(--navy);
+      letter-spacing: .5px;
+      white-space: nowrap;
+      padding-bottom: 8px;
+      border-bottom: 3px solid var(--gold);   /* thin gold underline — ties into your brand */
     }
 
   </style>
@@ -219,11 +266,17 @@
   </header>
 
   <!-- ================= HERO ================= -->
-  <section class="hero" style="padding:110px 20px;">
-    <h1>Connecting <em>Music Education</em> Worldwide</h1>
-    <p>We link students, professors, and sponsors across borders —
-       so world-class music education reaches everyone, everywhere.</p>
-    <a class="btn" href="#professors">Meet Our Professors</a>
+  <!-- ================= HERO BANNER ================= -->
+  <section class="hero-banner">
+    <div class="hero-side hero-left">
+      <span>Mentorship</span>
+      <span>Access</span>
+    </div>
+    <img src="logo.webp" alt="Graduates from around the world joining hands around a globe">
+    <div class="hero-side hero-right">
+      <span>Higher Education</span>
+      <span>International</span>
+    </div>
   </section>
 
   <main>
