@@ -1,25 +1,4 @@
 <!DOCTYPE html>
-<!--
-  ============================================================
-  Global MusicEd — Starter Template (study version)
-  ============================================================
-  This is ONE self-contained file: HTML + CSS + a little JS.
-  Study path I recommend:
-    1. Read top to bottom: header → hero → about → professors
-       → programs → sponsors → contact → footer.
-    2. Every <section> has a matching block of CSS with the
-       same name (e.g. .professors). Find the pair and see
-       how the styles shape the markup.
-    3. Change the colors in :root below and reload the page —
-       that's the fastest way to feel how CSS variables work.
-
-  How to use it for real:
-    - Replace the sample names/photos with your real professors.
-      Swap each .avatar circle for:  <img src="photo.jpg" alt="Prof. Name">
-    - Point your domain (globalmusiced.org) at any static host
-      (GitHub Pages, Netlify, Cloudflare Pages) and upload this file.
-  ============================================================
--->
 <html lang="en">
 <head>
   <meta charset="UTF-8">
@@ -73,7 +52,7 @@
       text-align: center; color: var(--muted);
       max-width: 640px; margin: 0 auto 48px;
     }
-
+    
     /* ============ HEADER / NAV ============
        position: sticky keeps the nav visible while scrolling. */
     header {
@@ -201,6 +180,11 @@
       /*  .hero h1 { font-size: 2rem; }
         section { padding: 52px 0; }
       }*/
+      .logo-sub { color: var(--gold); }
+
+        @media (max-width: 720px) {
+          .logo-sub { display: block; font-size: .95rem; }
+        }
       @media (max-width: 720px) {
           .menu-btn { display: none; }   /* no hamburger — links stay visible */
           .nav { flex-wrap: wrap; height: auto; padding: 12px 0; }
